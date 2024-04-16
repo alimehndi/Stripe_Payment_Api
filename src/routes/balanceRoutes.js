@@ -14,7 +14,7 @@ router.get('/',async(req,res) => {
         res.status(200).json({ success: true, balance });
       } catch (error) {
         console.error("Error creating payment link:", error);
-        res.status(500).json({ success: false, error: "Failed to create payment link" });
+        res.status(500).json({ success: false, error: "Failed to fetch balance" });
       }
 });
 
