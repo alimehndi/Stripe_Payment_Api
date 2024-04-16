@@ -5,6 +5,7 @@ dotenv.config();
 const router = express.Router();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
+//create a new product
 router.post('/',async(req,res) => {
   try {
     const { name } = req.body;
@@ -18,9 +19,12 @@ router.post('/',async(req,res) => {
   }
 
 });
+
+// update a new product 
 router.post('/:id',async(req,res) => {
   try {
-    const { productId, metadata } = req.body;
+    const productId = req.params.id;
+    const { metadata } = req.body;
     const product = await stripe.products.update(
       productId,
       {
@@ -33,9 +37,12 @@ router.post('/:id',async(req,res) => {
     res.status(500).json({ success: false, error: "Failed to update product metadata" });
   }
 });
+
+
+//get the product by product id
 router.get('/:id',async(req,res) => {
   try {
-    const productId = req.params.productId;
+    const productId = req.params.id;
     const product = await stripe.products.retrieve(productId);
     res.status(200).json({ success: true, product });
   } catch (error) {
@@ -43,6 +50,8 @@ router.get('/:id',async(req,res) => {
     res.status(500).json({ success: false, error: "Failed to retrieve product" });
   }
 });
+
+//get all product List
 router.get('/',async(req,res) => {
   try {
     const products = await stripe.products.list({
@@ -55,10 +64,11 @@ router.get('/',async(req,res) => {
   }
 });
 
+//delete an existing Product
 router.delete('/:id',async(req,res) => {
    
   try {
-    const productId = req.params.productId;
+    const productId = req.params.id;
     const deleted = await stripe.products.del(productId);
     res.status(200).json({ success: true, deleted });
   } catch (error) {

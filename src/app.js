@@ -23,5 +23,3 @@ app.use('/v1/prices',PriceRouter);
 app.use('/v1/products' , ProductRouter); 
 
 
-
-//# sourceMappingURL=app.mjs.map

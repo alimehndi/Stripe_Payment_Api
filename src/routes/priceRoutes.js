@@ -6,7 +6,7 @@ const router = express.Router();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 
-
+//add  a price to a product
 router.post('/',async(req,res) => {
     try {
         const { currency, unit_amount, interval, productName } = req.body;
@@ -27,9 +27,10 @@ router.post('/',async(req,res) => {
       }
 });
 
+//update the price of products
 router.post('/:id',async(req,res) => {
     try {
-        const priceId = req.params.priceId;
+        const priceId = req.params.id;
         const { metadata } = req.body;
         const price = await stripe.prices.update(
           priceId,
@@ -44,9 +45,11 @@ router.post('/:id',async(req,res) => {
       }
 });
 
+
+//get the price by id
 router.get('/:id',async(req,res) => {
     try {
-        const priceId = req.params.priceId;
+        const priceId = req.params.id;
         const price = await stripe.prices.retrieve(priceId);
         res.status(200).json({ success: true, price });
       } catch (error) {
@@ -55,6 +58,7 @@ router.get('/:id',async(req,res) => {
       }
 });
 
+//get the list of all products
 router.get('/',async(req,res) => {
     try {
         const prices = await stripe.prices.list({
@@ -66,6 +70,5 @@ router.get('/',async(req,res) => {
         res.status(500).json({ success: false, error: "Failed to list prices" });
       }
 });
-
 
 export {router as PriceRouter  };
