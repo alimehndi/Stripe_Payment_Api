@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import cors from 'cors';
+import { BalanceRouter } from "./routes/balanceRoutes.js";
 const port = 8001;
 const app = express();
 app.use(express.json());
@@ -21,5 +22,5 @@ app.listen(port, () => {
 app.use('/v1/payment_links',PaymentRouter); 
 app.use('/v1/prices',PriceRouter); 
 app.use('/v1/products' , ProductRouter); 
-
+app.use('/v1/balance',BalanceRouter);
 
