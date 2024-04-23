@@ -1,6 +1,6 @@
-import mongoose, { Aggregate } from "mongoose";
-import Product from "./productSchema";
-import { type } from "os";
+import mongoose from "mongoose";
+
+
 const priceSchema = mongoose.Schema({
     _id :  {type : String, require : true},
     object :{type : String, default :"price" },
@@ -10,10 +10,10 @@ const priceSchema = mongoose.Schema({
     currency:{type:String , default: "usd"},
     custom_unit_amount : {},
     livemode:{type: Boolean, default:false},
-    lookip_key : {},
-    metadate:{type : Map, of:String},
+    lookup_key : {},
+    metadata:{type : Map, of:String,default:{}},
     nickname : {type : String},
-    product: { type: Schema.Types.ObjectId, ref: Product, required: true},
+    product: { type: String, required: true},
     recurring :
                 {
                     aggregate_usage : {type : String , enum : ['last_during_period', 'last_ever', 'max', 'sum'], default :'sum'},

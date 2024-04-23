@@ -1,7 +1,4 @@
-import { subscribe } from "diagnostics_channel";
-import { application } from "express";
 import mongoose from "mongoose";
-import { type } from "os";
 
 const paymentLinkSchema = mongoose.Schema({
     _id : {type :String, require: true},
@@ -64,3 +61,6 @@ const paymentLinkSchema = mongoose.Schema({
     transfer_data: {type: String},
     url: {type:String, require:true}
 })
+
+const PaymentLink = mongoose.model('PaymentLink',paymentLinkSchema);
+export default PaymentLink;

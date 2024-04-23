@@ -4,16 +4,23 @@ import dotenv from 'dotenv';
 dotenv.config();
 const router = express.Router();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-
+import Product from '../mongoDB/model/productSchema.js'
 //create a new product
 router.post('/',async(req,res) => {
   try {
     const { name } = req.body;
-    const product = await stripe.products.create({
+    const product_ = await stripe.products.create({
       name: name,
     });
+    console.log(product_);
+    try {
+      await Product.create({_id : product_.id,...product_});
+      console.log("Product data inserted successfully.");
+  } catch (error) {
+      console.error("Error inserting Product data:", error);
+  }
     
-    res.status(200).json({ success: true, product });
+    res.status(200).json({ success: true, product_ });
   } catch (error) {
     console.error("Error creating product:", error);
     res.status(500).json({ success: false, error: "Failed to create product" });
@@ -32,6 +39,18 @@ router.post('/:id',async(req,res) => {
         metadata: metadata,
       }
     );
+    const update = {
+      metadata: metadata,
+    };
+    console.log(update)
+    try {
+     const newdata= await  Product.findByIdAndUpdate(productId,update,{new:true});
+     console.log(newdata);
+      console.log("Product data updated successfully.");
+  } catch (error) {
+      console.error("Error updating Product data:", error);
+  }
+    
     res.status(200).json({ success: true, product });
   } catch (error) {
     console.error("Error updating product metadata:", error);

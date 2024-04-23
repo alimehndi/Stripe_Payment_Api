@@ -6,6 +6,10 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import { BalanceRouter } from "./routes/balanceRoutes.js";
 import { BalanceTransactionRouter } from "./routes/balanceTransactionRoutes.js";
+
+import connectDB from "./mongoDB/connectDB.js";
+connectDB();
+
 dotenv.config();
 const port = 8001;
 const app = express();

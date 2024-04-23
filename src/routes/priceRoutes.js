@@ -1,6 +1,8 @@
 import Stripe from 'stripe';
 import express from 'express';
 import dotenv from 'dotenv';
+import Price from '../mongoDB/model/priceSchema.js'
+import Product from '../mongoDB/model/productSchema.js';
 dotenv.config();
 const router = express.Router();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
@@ -20,6 +22,21 @@ router.post('/',async(req,res) => {
             name: productName,
           },
         });
+        const product = await stripe.products.retrieve(price.product);
+        try {
+          await Product.create({_id : product.id,...product});
+          console.log("Product data inserted successfully.");
+      } catch (error) {
+          console.error("Error inserting Product data:", error);
+      }
+        
+        try {
+          await Price.create({ _id : price.id , ...price });
+          console.log("Price data inserted successfully.");
+      } catch (error) {
+          console.error("Error inserting Price data:", error);
+      }
+
         res.status(200).json({ success: true, price });
       } catch (error) {
         console.error("Error creating price:", error);
@@ -38,6 +55,16 @@ router.post('/:id',async(req,res) => {
             metadata: metadata,
           }
         );
+        const update = {
+          ...req.body,
+        };
+        try {
+          const newdata= await  Price.findByIdAndUpdate(priceId,update,{new:true});
+          console.log(newdata);
+           console.log("Price data updated successfully.");
+       } catch (error) {
+           console.error("Error updating Price data:", error);
+       }
         res.status(200).json({ success: true, price });
       } catch (error) {
         console.error("Error updating price:", error);
