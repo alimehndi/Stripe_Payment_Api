@@ -12,6 +12,7 @@ router.post('/',async(req,res) => {
     const product = await stripe.products.create({
       name: name,
     });
+    
     res.status(200).json({ success: true, product });
   } catch (error) {
     console.error("Error creating product:", error);
