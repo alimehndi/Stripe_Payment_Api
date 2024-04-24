@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import express from 'express'
 import dotenv from 'dotenv';
-
+import PaymentLink from '../mongoDB/model/paymentLinkSchema.js';
 dotenv.config();
 const router = express.Router();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
@@ -13,7 +13,14 @@ router.post('/',async(req,res) => {
         const paymentLink = await stripe.paymentLinks.create({
           line_items: line_items,
         });
-      
+        try {
+          await PaymentLink.create({_id : paymentLink.id,...paymentLink});
+          console.log("Payment data inserted successfully.");
+      } catch (error) {
+          console.error("Error inserting Payment data:", error);
+      }
+    
+        
         res.status(200).json({ success: true, paymentLink });
       } catch (error) {
         console.error("Error creating payment link:", error);
@@ -32,6 +39,15 @@ router.post('/:id',async(req,res) => {
             metadata: metadata,
           }
         );
+        const update ={
+          metadata:metadata,
+        } ;
+        try {
+          const newdata= await  PaymentLink.findByIdAndUpdate(paymentLinkId,update,{new:true});
+           console.log("Payment data updated successfully.");
+       } catch (error) {
+           console.error("Error updating Payment data:", error);
+       }
         res.status(200).json({ success: true, paymentLink });
       } catch (error) {
         console.error("Error updating payment link:", error);
