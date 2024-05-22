@@ -51,7 +51,9 @@ router.post('/:id',async(req,res) => {
         const { metadata } = req.body;
         const price = await stripe.prices.update(
           priceId,
+          
           {
+          
             metadata: metadata,
           }
         );
