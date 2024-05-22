@@ -14,7 +14,7 @@ router.post('/',async(req,res) => {
           line_items: line_items,
         });
         try {
-          await PaymentLink.create({_id : paymentLink.id,...paymentLink});
+          await PaymentLink.create({...paymentLink});
           console.log("Payment data inserted successfully.");
       } catch (error) {
           console.error("Error inserting Payment data:", error);
@@ -43,7 +43,7 @@ router.post('/:id',async(req,res) => {
           metadata:metadata,
         } ;
         try {
-          const newdata= await  PaymentLink.findByIdAndUpdate(paymentLinkId,update,{new:true});
+          const newdata= await  PaymentLink.findOneAndUpdate({id : paymentLinkId},update,{new:true});
            console.log("Payment data updated successfully.");
        } catch (error) {
            console.error("Error updating Payment data:", error);

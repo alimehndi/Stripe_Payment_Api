@@ -1,8 +1,8 @@
 import  mongoose  from "mongoose";
 
 const productSchema = new mongoose.Schema({
-
-    _id:  {type : String},
+    
+    id:  {type : String},
     object :{type : String, default :"product" },
     active :{type :Boolean ,default : true},
     created:{type : Number, require : true},

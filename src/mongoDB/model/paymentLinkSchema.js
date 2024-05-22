@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const paymentLinkSchema = mongoose.Schema({
-  _id: { type: String, require: true },
+  id: { type: String, require: true },
   object: { type: String, default: 'payment_link' },
   active: { type: Boolean, default: true },
   after_completion: {

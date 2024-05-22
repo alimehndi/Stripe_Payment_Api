@@ -1,9 +1,8 @@
 import Stripe from 'stripe';
 import express from 'express'
-import Event from '../mongoDB/model/eventSchema.js';
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const app = express();
-
+import Event from '../mongoDB/model/eventSchema.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -27,7 +26,7 @@ app.post('/webhook', express.raw({type: 'application/json'}), async (request, re
   }
   try {
     
-     await Event.create({_id : event.id,...event});
+     await Event.create({...event});
      console.log("Event data inserted successfully.");
   } catch (error) {
     console.error("Error inserting Event data:", error);

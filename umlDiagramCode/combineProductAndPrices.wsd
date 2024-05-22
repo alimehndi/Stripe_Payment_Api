@@ -1,0 +1,103 @@
+@startuml
+actor User
+participant "Express Router" as Router
+participant Stripe
+database MongoDB
+
+User -> Router: POST /products
+activate Router
+Router -> Stripe: stripe.products.create()
+activate Stripe
+Stripe -> MongoDB: Product.create()
+activate MongoDB
+MongoDB --> Stripe: Success
+deactivate MongoDB
+Stripe --> Router: Success
+deactivate Stripe
+Router --> User: Success
+deactivate Router
+
+User -> Router: POST /products/:id
+activate Router
+Router -> Stripe: stripe.products.update()
+activate Stripe
+Stripe --> Router: product
+deactivate Stripe
+Router --> MongoDB: Product.findOneAndUpdate()
+activate MongoDB
+MongoDB --> Router: newdata
+deactivate MongoDB
+Router --> User: Success
+deactivate Router
+
+User -> Router: GET /products/:id
+activate Router
+Router -> Stripe: stripe.products.retrieve()
+activate Stripe
+Stripe --> Router: product
+deactivate Stripe
+Router --> User: product
+deactivate Router
+
+User -> Router: GET /products
+activate Router
+Router -> Stripe: stripe.products.list()
+activate Stripe
+Stripe --> Router: products
+deactivate Stripe
+Router --> User: products
+deactivate Router
+
+User -> Router: DELETE /products/:id
+activate Router
+Router -> Stripe: stripe.products.del()
+activate Stripe
+Stripe --> Router: deleted
+deactivate Stripe
+Router --> User: Success
+deactivate Router
+
+User -> Router: POST /prices
+activate Router
+Router -> Stripe: stripe.prices.create()
+activate Stripe
+Stripe -> MongoDB: Price.create()
+activate MongoDB
+MongoDB --> Stripe: Success
+deactivate MongoDB
+Stripe --> Router: price
+deactivate Stripe
+Router --> User: Success
+deactivate Router
+
+User -> Router: POST /prices/:id
+activate Router
+Router -> Stripe: stripe.prices.update()
+activate Stripe
+Stripe --> Router: price
+deactivate Stripe
+Router --> MongoDB: Price.findOneAndUpdate()
+activate MongoDB
+MongoDB --> Router: newdata
+deactivate MongoDB
+Router --> User: Success
+deactivate Router
+
+User -> Router: GET /prices/:id
+activate Router
+Router -> Stripe: stripe.prices.retrieve()
+activate Stripe
+Stripe --> Router: price
+deactivate Stripe
+Router --> User: price
+deactivate Router
+
+User -> Router: GET /prices
+activate Router
+Router -> Stripe: stripe.prices.list()
+activate Stripe
+Stripe --> Router: prices
+deactivate Stripe
+Router --> User: prices
+deactivate Router
+@enduml

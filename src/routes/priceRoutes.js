@@ -24,14 +24,14 @@ router.post('/',async(req,res) => {
         });
         const product = await stripe.products.retrieve(price.product);
         try {
-          await Product.create({_id : product.id,...product});
+          await Product.create({...product});
           console.log("Product data inserted successfully.");
       } catch (error) {
           console.error("Error inserting Product data:", error);
       }
         
         try {
-          await Price.create({ _id : price.id , ...price });
+          await Price.create({  ...price });
           console.log("Price data inserted successfully.");
       } catch (error) {
           console.error("Error inserting Price data:", error);
@@ -61,7 +61,7 @@ router.post('/:id',async(req,res) => {
           ...req.body,
         };
         try {
-          const newdata= await  Price.findByIdAndUpdate(priceId,update,{new:true});
+          const newdata= await  Price.findOneAndUpdate({id: priceId},update,{new:true});
           console.log(newdata);
            console.log("Price data updated successfully.");
        } catch (error) {

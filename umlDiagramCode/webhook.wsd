@@ -1,0 +1,24 @@
+@startuml
+
+actor Stripe
+participant Server as App
+database MongoDB
+
+Stripe -> App: POST /webhook
+activate App
+App -> Stripe: stripe.webhooks.constructEvent()
+activate Stripe
+Stripe --> App: event
+deactivate Stripe
+App -> MongoDB: Event.create()
+activate MongoDB
+MongoDB --> App: success
+deactivate MongoDB
+App -> User: Handle event
+deactivate App
+User --> App: response.send()
+activate App
+App --> Stripe: 200 OK
+deactivate App
+
+@enduml

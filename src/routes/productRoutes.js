@@ -14,7 +14,7 @@ router.post('/',async(req,res) => {
     });
     console.log(product_);
     try {
-      await Product.create({_id : product_.id,...product_});
+      await Product.create({...product_});
       console.log("Product data inserted successfully.");
   } catch (error) {
       console.error("Error inserting Product data:", error);
@@ -44,7 +44,7 @@ router.post('/:id',async(req,res) => {
     };
     console.log(update)
     try {
-     const newdata= await  Product.findByIdAndUpdate(productId,update,{new:true});
+     const newdata= await  Product.findOneAndUpdate({id: productId },update,{new:true});
      console.log(newdata);
       console.log("Product data updated successfully.");
   } catch (error) {

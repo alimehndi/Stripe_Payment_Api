@@ -15,7 +15,7 @@ router.get('/',async(req,res) => {
           });
         res.status(200).json({ success: true, balanceTransactions });
       } catch (error) {
-        console.error("Error creating payment link:", error);
+        console.error("Error Fetching the Balance Transactions:", error);
         res.status(500).json({ success: false, error: "Failed to fetch balance Transactions" });
       }
 });
@@ -29,7 +29,7 @@ router.get('/:id',async(req,res) => {
           );
         res.status(200).json({ success: true, balanceTransaction });
       } catch (error) {
-        console.error("Error creating payment link:", error);
+        console.error("Error Fetching the Balance Transactions :", error);
         res.status(500).json({ success: false, error: "Failed to fetch balance Transaction" });
       }
 });

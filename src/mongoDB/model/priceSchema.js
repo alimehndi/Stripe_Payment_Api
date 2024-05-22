@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 
 const priceSchema = mongoose.Schema({
-    _id :  {type : String, require : true},
+    id :  {type : String},
     object :{type : String, default :"price" },
     active :{type :Boolean ,default : true},
     billing_scheme:{type : String, default :"per_unit" },

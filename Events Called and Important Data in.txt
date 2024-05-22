@@ -1,0 +1,397 @@
+Events Called and Important Data in it :
+
+1. product.created
+	a. id(Event)
+	b. created
+	c. id(Product)
+	d. active
+	e. created
+	f. metadata  
+		
+2. product.updated
+	a. id(Event)
+	b. created
+	c. id(Product)
+	d. active
+	e. created
+	f. metadata  
+	
+3. product.deleted
+	a. id(Event)
+	b. created
+	c. id(Product)
+	d. active
+	e. created
+	f. metadata  
+	
+4. price.created
+	a. id(event)
+	b. created
+	c. id(price)
+	d. active
+	e. billing_Scheme ("per_unit")
+	f. currency
+	g. custom_unit_amount
+	h. product(ID)
+	i. recurring ?:
+	j. type: (recurring, oneTime)
+	k. unit_amount:
+        l. unit_amount_decimal
+        
+5. price.updated
+	a. id(event)
+	b. created
+	c. id(price)
+	d. active
+	e. billing_Scheme ("per_unit")
+	f. currency
+	g. custom_unit_amount
+	h. product(ID)
+	i. recurring ?:
+	j. type: (recurring, oneTime)
+	k. unit_amount:
+        l. unit_amount_decimal
+ 
+6. plan.created
+	a. id(event)
+	b. created
+	c. id(price)
+	d. active
+	e. amount
+	f. amount_decimal
+	g. billing_scheme
+	h. currency
+	i. created
+	j. interval
+	k. interval_count
+	l. product(Id)
+	m. 
+	   
+7. payment_link.created
+	a. id(event):
+	b. created:
+	c. id(payment_link):
+	d. object
+	e. active 
+	f. currency
+	g. invoice_creation 
+	h. invoice_data ?:
+	i. payment_method_collection:
+	j. url:
+	k. metadata
+        
+8. payment_link.updated
+	a. id(event):
+	b. created:
+	c. id(payment_link):
+	d. object
+	e. active 
+	f. currency
+	g. invoice_creation 
+	h. invoice_data ?:
+	i. payment_method_collection:
+	j. url:
+	k. metadata
+        
+9. payment_intent.created
+	a. id (event)
+	b. created
+	c. id(payment_intent)
+	d. object
+	e. amount
+	f. amount received
+	g. canceled_at
+	h. cancellation_reason
+	i. created
+	j. currency
+        k. latest_charge
+	k. payment_method
+	l. payment_method_types
+	m. status
+
+10. payment_intent.succeeded
+	a. id (event)
+	b. created
+	c. id(payment_intent)
+	d. object
+	e. amount
+	f. amount received
+	g. canceled_at
+	h. cancellation_reason
+	i. created
+	j. currency
+        k. latest_charge
+	k. payment_method
+	l. payment_method_types
+	m. status
+
+11. charge.updated
+	a. id(event)
+	b. created
+	c. id(charge) 
+	d. object
+	e. amount
+	f. amount_captured
+	g. amount_refunded
+	h. billing_details
+	i. paid
+	j. payment_intent(id)
+	k. payment_method(id)
+	l. payment_method_details
+	m. receipt_email
+	n. receipt_number
+	o. refunded
+	p. receipt_url
+	q. status
+
+12. charge.succeeded
+	a. id(event)
+	b. created
+	c. id(charge) 
+	d. object
+	e. amount
+	f. amount_captured
+	g. amount_refunded
+	h. billing_details
+	i. paid
+	j. payment_intent(id)
+	k. payment_method(id)
+	l. payment_method_details
+	m. receipt_email
+	n. receipt_number
+	o. refunded
+	p. receipt_url
+	q. status
+13. customer.created
+	a. id(event)
+	b. created
+	c. id(customer)
+	d. object
+	e. address
+	f. balance
+	g. created
+	h. currency
+	i. email
+	j. invoice_prefix
+	k. name 
+	l. phone
+	
+14. customer.updated
+	a. id(event)
+	b. created
+	c. id(customer)
+	d. object
+	e. address
+	f. balance
+	g. created
+	h. currency
+	i. email
+	j. invoice_prefix
+	k. name 
+	l. phone
+	
+15. customer.subscription.created
+	a. id(event)
+	b. created
+	c. id(subscription)
+	d. object
+	e. cancel_at:
+	f. cancel_at_period_end
+	g. collection_method (charged_automatically)
+	h. created
+	i. currency
+	j. current_period_start
+	k. current_period_end
+	l. customer
+	m. default_payment_method
+	n. items(object of plans)
+	o. latest_invoice
+	p. payment_method_option
+
+16. customer.subscription.updated
+	a. id(event)
+	b. created
+	c. id(subscription)
+	d. object
+	e. cancel_at:
+	f. cancel_at_period_end
+	g. collection_method (charged_automatically)
+	h. created
+	i. currency
+	j. current_period_start
+	k. current_period_end
+	l. customer
+	m. default_payment_method
+	n. items(object of plans)
+	o. latest_invoice
+	p. payment_method_option
+
+17. invoice.created
+	a. id(event)
+	b. created
+	c. id(invoice)
+	d. object
+	e. acccount_country
+	f. account_name
+	g. amount_due
+	h. amount_paid
+	i. amount_remaining
+	j. attempt_count
+	k. attempted
+	l. charge(id)
+	m. collection_method
+	m. created 
+	o. currency
+	p. customer(id)
+	q. customer_address
+	r. customer_email
+	s. customer_phone
+	t. customer_name
+	u. effective_At
+	v. hosted_invoice_url
+	w. invoice_pdf
+	x. items (object of line Items)
+
+18 invoice.updated
+	a. id(event)
+	b. created
+	c. id(invoice)
+	d. object
+	e. acccount_country
+	f. account_name
+	g. amount_due
+	h. amount_paid
+	i. amount_remaining
+	j. attempt_count
+	k. attempted
+	l. charge(id)
+	m. collection_method
+	m. created 
+	o. currency
+	p. customer(id)
+	q. customer_address
+	r. customer_email
+	s. customer_phone
+	t. customer_name
+	u. effective_At
+	v. hosted_invoice_url
+	w. invoice_pdf
+	x. items (object of line Items)
+
+19 Ivoice.paid
+	a. id(event)
+	b. created
+	c. id(invoice)
+	d. object
+	e. acccount_country
+	f. account_name
+	g. amount_due
+	h. amount_paid
+	i. amount_remaining
+	j. attempt_count
+	k. attempted
+	l. charge(id)
+	m. collection_method
+	m. created 
+	o. currency
+	p. customer(id)
+	q. customer_address
+	r. customer_email
+	s. customer_phone
+	t. customer_name
+	u. effective_At
+	v. hosted_invoice_url
+	w. invoice_pdf
+	x. items (object of line Items)
+
+20. invoice.finalized
+	a. id(event)
+	b. created
+	c. id(invoice)
+	d. object
+	e. acccount_country
+	f. account_name
+	g. amount_due
+	h. amount_paid
+	i. amount_remaining
+	j. attempt_count
+	k. attempted
+	l. charge(id)
+	m. collection_method
+	m. created 
+	o. currency
+	p. customer(id)
+	q. customer_address
+	r. customer_email
+	s. customer_phone
+	t. customer_name
+	u. effective_At
+	v. hosted_invoice_url
+	w. invoice_pdf
+	x. items (object of line Items)
+
+21. invoice.payment_succeeded
+	a. id(event)
+	b. created
+	c. id(invoice)
+	d. object
+	e. acccount_country
+	f. account_name
+	g. amount_due
+	h. amount_paid
+	i. amount_remaining
+	j. attempt_count
+	k. attempted
+	l. charge(id)
+	m. collection_method
+	m. created 
+	o. currency
+	p. customer(id)
+	q. customer_address
+	r. customer_email
+	s. customer_phone
+	t. customer_name
+	u. effective_At
+	v. hosted_invoice_url
+	w. invoice_pdf
+	x. items (object of line Items)
+
+22. payment_method.attached
+	a. id(event)
+	b. created
+	c. id(payment_method)
+	d. object
+	e. billing_details
+	f. email
+	g. name
+	h. phone_number
+	i. card
+	j. country
+	k. display_brand :visa/mastercard
+	l. exp_month
+	m. exp_year
+	n. fingerprint
+	o. last4
+	p. created
+	q. customer
+
+23. checkout.session.completed
+	a. id(event)
+	b. created
+	c. id(checkooutId)
+	d. object
+	e. amount_subtotal
+	f. amount_total
+	g. created 
+	h. currency
+	i. currency_conversion
+	j. customer_details
+	k. invoice_creation
+	l. paymentIntentId
+	m. payment_Link
+	n. payment_method_collection
+	o. payment_status
+	p. status
+	q. success_url
+
+

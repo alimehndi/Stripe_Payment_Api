@@ -1,0 +1,55 @@
+NON RECURRING (ONE TIME):
+
+Product Created:             a. product.created
+Product Updated:             a. product.updated
+Product Deleted:             a. product.deleted
+
+Price Created :              a. price.created
+                             b. product.created(optional)
+Price Updated:               a. price.updated
+
+Payment Link Created:        a. payment_link.created
+Payment Link Updated:        a. payment_link.updated
+
+Payment Done(not recurring): a. checkout.session.completed
+                             b. charge.updated
+                             c. payment_intent.created
+                             d. payment_intent.succeeded
+                             e. charge.succeeded
+
+
+RECURRING PAYMENTS:
+
+Product Created:             a. product.created
+Product Updated:             a. product.updated
+Product Deleted:             a. product.deleted
+
+Price Created :              a. price.created
+                             b. plan.created
+                             b. product.created(optional)
+Price Updated:               a. price.updated
+
+Payment Link Created:        a. payment_link.created
+Payment Link Updated:        a. payment_link.updated
+
+Payment Done(not recurring): a. charge.updated
+                             b. charge.succeeded
+                             c. customer.created
+ 			     d. customer.updated
+			     e. customer.subscription.created
+			     f. customer.subscription.updated
+                             g. payment_intent.created
+                             h. payment_intent.succeeded                             
+                             i. customer.updated
+                             j. invoice.paid
+                             k. invoice.created
+			     l. invoice.updated
+                             m. invoice.payment_succeeded
+                             n. invoice.finalized
+                             o. invoice.paid
+                             p. payment_method.attached
+                             q. checkout.session.completed
+
+
+
+
