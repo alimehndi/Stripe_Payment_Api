@@ -8,6 +8,10 @@ import { BalanceRouter } from "./routes/balanceRoutes.js";
 import { BalanceTransactionRouter } from "./routes/balanceTransactionRoutes.js";
 
 import connectDB from "./mongoDB/connectDB.js";
+import { PaymentIntentsRouter } from "./routes/paymentIntents.js";
+import { sessionRouter } from "./routes/sessionCheckoutRoutes.js";
+import { EventsRouter } from "./routes/eventsRoutes.js";
+import { PaymentMethodRouter } from "./routes/paymentMethodRoutes.js";
 connectDB();
 
 dotenv.config();
@@ -20,7 +24,7 @@ app.get('/',(req,res) => {
     res.send('Express server ');
 })
 app.listen(port, () => {
-    console.log(`[server]: Server is running at http://localhost:${port}`);
+    console.log(`[server]: Server is running at http://localhost:${port}`)
 });
 
 app.use('/v1/payment_links',PaymentRouter); 
@@ -28,8 +32,10 @@ app.use('/v1/prices',PriceRouter);
 app.use('/v1/products' , ProductRouter); 
 app.use('/v1/balance',BalanceRouter);
 app.use('/v1/balance_transactions',BalanceTransactionRouter);
-
-
+app.use('/v1/payment_intents',PaymentIntentsRouter)
+app.use('/v1/checkout/sessions',sessionRouter)
+app.use('/v1/events',EventsRouter)
+app.use('/v1/payment_methods',PaymentMethodRouter)
 
 
 app.post('/webhook', express.raw({type: 'application/json'}), (request, response) => {

@@ -9,16 +9,23 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 //generate a new payment link for the item
 router.post('/',async(req,res) => {
     try {
-        const { line_items } = req.body;
-        const paymentLink = await stripe.paymentLinks.create({
-          line_items: line_items,
-        });
-        try {
-          await PaymentLink.create({...paymentLink});
-          console.log("Payment data inserted successfully.");
-      } catch (error) {
-          console.error("Error inserting Payment data:", error);
-      }
+        const { line_items, payment_intent_data,payment_method_options } = req.body;
+        const paymentLink = await stripe.paymentLinks.create(
+           {
+           line_items: line_items,
+           payment_intent_data:payment_intent_data,
+           payment_method_options:payment_method_options
+         }
+        
+      );
+        
+
+      //   try {
+      //     await PaymentLink.create({...paymentLink});
+      //     console.log("Payment data inserted successfully.");
+      // } catch (error) {
+      //     console.error("Error inserting Payment data:", error);
+      // }
     
         
         res.status(200).json({ success: true, paymentLink });

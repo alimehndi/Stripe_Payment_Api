@@ -11,17 +11,21 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 //add  a price to a product
 router.post('/',async(req,res) => {
     try {
-        const { currency, unit_amount, interval, productName } = req.body;
-        const price = await stripe.prices.create({
-          currency: currency,
-          unit_amount: unit_amount,
-          recurring: {
-            interval: interval,
-          },
-          product_data: {
-            name: productName,
-          },
-        });
+        // const { currency, unit_amount, interval, productName } = req.body;
+        // const price = await stripe.prices.create({
+        //   currency: currency,
+        //   unit_amount: unit_amount,
+        //   recurring: {
+        //     interval: interval,
+        //   },
+        //   product_data: {
+        //     name: productName,
+        //   },
+        // });
+        const data = req.body;
+        const price = await stripe.prices.create(data);
+        
+
         const product = await stripe.products.retrieve(price.product);
         try {
           await Product.create({...product});
